@@ -142,9 +142,17 @@ module.exports = class Server {
         #setupStaticRoutes = () => {
         console.log("⬆️  Configurando rotas estáticas...");
 
+<<<<<<< HEAD
         // 🔹 Caminho dinâmico da pasta static (funciona em qualquer computador)
             const path = require('path');
             const staticBasePath = path.join(__dirname, 'static');
+=======
+        // 🔹 Caminho absoluto da pasta static
+        const path = require('path');
+        const staticBasePath = path.resolve(
+            "C:\\Users\\Ana\\Desktop\\xamp\\htdocs\\web\\API-NODEJS-MVCS-RESTFUL-CRUD-COMPLETE-FRONTEND-main\\API-NODEJS-MVCS-RESTFUL-CRUD-COMPLETE-FRONTEND-main\\API-NODEJS-MVCS-RESTFUL-CRUD-COMPLETE-FRONTEND-main\\static"
+        );
+>>>>>>> 9a210f335fd8b5a2ee29e41a173500935ba28ce6
 
         // 🔹 Servir automaticamente todos os arquivos da pasta /static
         this.#app.use(express.static(staticBasePath));
