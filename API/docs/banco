@@ -1,0 +1,43 @@
+-- 1️⃣ Deleta o banco antigo (se existir)
+DROP DATABASE IF EXISTS `casa_branca`;
+
+-- 2️⃣ Cria o novo banco
+CREATE DATABASE `casa_branca` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `casa_branca`;
+
+-- 3️⃣ Tabela de Hospedes
+CREATE TABLE IF NOT EXISTS `hospede` (
+  `idHospede` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(70) NOT NULL,
+  `start_moradia` DATE NOT NULL,
+  `end_moradia` DATE NOT NULL,
+  `telefone` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `requisicao` VARCHAR(1000) DEFAULT NULL,
+  `CPF` VARCHAR(11) NOT NULL,
+  PRIMARY KEY (`idHospede`),
+  UNIQUE KEY `unique_email` (`email`),
+  UNIQUE KEY `unique_cpf` (`CPF`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 4️⃣ Tabela de Hoteis (opcional, já pronta para expandir)
+CREATE TABLE IF NOT EXISTS `hotel` (
+  `idHotel` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `descricao` VARCHAR(255) DEFAULT NULL,
+  `capacidade` INT NOT NULL,
+  PRIMARY KEY (`idHotel`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 5️⃣ Tabela de Reservas (relaciona hospede e hotel)
+CREATE TABLE IF NOT EXISTS `reserva` (
+  `idReserva` INT NOT NULL AUTO_INCREMENT,
+  `idHospede` INT NOT NULL,
+  `idHotel` INT NOT NULL,
+  `start_moradia` DATE NOT NULL,
+  `end_moradia` DATE NOT NULL,
+  PRIMARY KEY (`idReserva`),
+  FOREIGN KEY (`idHospede`) REFERENCES `hospede`(`idHospede`) ON DELETE CASCADE,
+  FOREIGN KEY (`idHotel`) REFERENCES `hotel`(`idHotel`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
